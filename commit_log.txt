@@ -29,3 +29,4 @@
 2025-10-22 10:30:00 - Finalized API integration between Django and frontend.
 2025-10-22 19:00:00 - Cleaned code, improved serializers.
 2025-10-11 14:00:00 - Initial DRF project setup – created base structure for backend and contacts app.
+2025-10-11 17:30:00 - Added Contact model and initial migrations.
