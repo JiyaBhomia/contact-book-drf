@@ -33,3 +33,4 @@
 2025-10-16 13:15:00 - Integrated Django REST Framework and created serializers for Contact model.
 2025-10-16 18:00:00 - Added ContactViewSet and registered routes in urls.py.
 2025-10-17 11:00:00 - Implemented JWT authentication using SimpleJWT.
+2025-10-17 15:45:00 - Tested API endpoints for registration and login.
