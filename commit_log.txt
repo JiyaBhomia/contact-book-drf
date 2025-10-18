@@ -34,3 +34,4 @@
 2025-10-16 18:00:00 - Added ContactViewSet and registered routes in urls.py.
 2025-10-17 11:00:00 - Implemented JWT authentication using SimpleJWT.
 2025-10-17 15:45:00 - Tested API endpoints for registration and login.
+2025-10-18 12:00:00 - Connected frontend (HTML/JS) with backend APIs using fetch().
