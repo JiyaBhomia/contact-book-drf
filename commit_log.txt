@@ -37,3 +37,4 @@
 2025-10-18 12:00:00 - Connected frontend (HTML/JS) with backend APIs using fetch().
 2025-10-18 16:20:00 - Added CORS configuration and tested full CRUD flow.
 2025-10-22 10:30:00 - Finalized API integration between Django and frontend.
+2025-10-22 19:00:00 - Cleaned code, improved serializers.
