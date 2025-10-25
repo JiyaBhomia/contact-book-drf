@@ -1,0 +1,57 @@
+<h2>Backend Login Page</h2>
+<p>Log in to the API (on port 8001) to get your token.</p>
+
+<form id="login-form">
+    {% csrf_token %}
+
+    <p>
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required>
+    </p>
+    <p>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+    </p>
+    <button type="submit">Login</button>
+</form>
+
+<a href="{% url 'backend-register' %}">Go to Register</a>
+<hr>
+<h3>Your Access Token:</h3>
+<pre id="token-display">Login to see your token.</pre>
+
+<script>
+    document.getElementById('login-form').addEventListener('submit', async function(event) {
+        event.preventDefault(); 
+        const username = event.target.username.value;
+        const password = event.target.password.value;
+        const tokenDisplay = document.getElementById('token-display');
+
+        // STEP 2: Find the CSRF token in the form
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        try {
+            const response = await fetch('/api/token/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // STEP 3: Send the token in the request header
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                tokenDisplay.innerText = data.access;
+                alert('Login successful! Your token is displayed below.');
+            } else {
+                tokenDisplay.innerText = 'Login failed. Please try again.';
+                alert('Login failed: Invalid username or password.');
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            alert('An error occurred.');
+        }
+    });
+</script>

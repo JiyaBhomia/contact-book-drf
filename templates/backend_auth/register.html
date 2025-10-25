@@ -1,0 +1,52 @@
+<h2>Backend Registration Page</h2>
+<p>Register a new user for the API (on port 8001)</p>
+
+<form id="register-form">
+    {% csrf_token %}
+
+    <p>
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required>
+    </p>
+    <p>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+    </p>
+    <button type="submit">Register</button>
+</form>
+
+<a href="{% url 'backend-login' %}">Go to Login</a>
+
+<script>
+    document.getElementById('register-form').addEventListener('submit', async function(event) {
+        event.preventDefault(); 
+        const username = event.target.username.value;
+        const password = event.target.password.value;
+
+        // STEP 2: Find the CSRF token in the form
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        try {
+            const response = await fetch('/api/register/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // STEP 3: Send the token in the request header
+                    'X-CSRFToken': csrfToken 
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (response.status === 201) {
+                alert('Registration successful! You can now log in.');
+                window.location.href = "{% url 'backend-login' %}";
+            } else {
+                const data = await response.json();
+                alert('Registration failed: ' + JSON.stringify(data));
+            }
+        } catch (error) {
+            console.error('Error during registration:', error);
+            alert('Could not connect to the server.');
+        }
+    });
+</script>
